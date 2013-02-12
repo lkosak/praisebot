@@ -1,0 +1,18 @@
+{
+  "name": "praisebot",
+  "version": "0.0.0",
+  "description": "A bot for praising",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lkosak/praisebot"
+  },
+  "author": "Lou Kosak <lkosak@gmail.com>",
+  "license": "BSD",
+  "dependencies": {
+    "node-xmpp": "~0.3.2"
+  }
+}
