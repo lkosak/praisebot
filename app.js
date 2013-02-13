@@ -141,7 +141,7 @@ function joinRoom(node) {
 }
 
 // keepalive
-setTimeout(function() {
+setInterval(function() {
   console.log('sending keepalive');
   client.send(' ');
 }, config.keepalive_interval);
