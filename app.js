@@ -74,12 +74,12 @@ function makeReply(stanza) {
   var replies = [
     "That's wonderful to hear, "+user.at_name()+"!",
     "Smashing good show, "+user.first_name()+"!",
-    "Oh, you're the bees' knees, mister "+user.last_name()+"!",
+    "Oh, you're the bee's knees, mister "+user.last_name()+"!",
     "I'd like to take you on a nice trip up to the Catskills, "+user.at_name()+"!",
     "You're like an exploding star, "+user.at_name()+"! Ever burning brighter...",
     "I'd like to introduce you to my parents, "+user.at_name()+"!",
     "Want to go on a fishing trip with me, "+user.at_name()+"?",
-    "Lets' elope to Istanbul, "+user.at_name()+"!",
+    "Let's elope to Istanbul, "+user.at_name()+"!",
     "With that kind of great work, you'll make middle management in no time!"
   ];
 
