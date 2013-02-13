@@ -1,5 +1,7 @@
 var xmpp = require('node-xmpp');
 var config = require('config');
+var http = require('http');
+var HttpClient = require('scoped-http-client');
 var User = require('user');
 
 var client = new xmpp.Client({ jid: config.jid, password: config.password });
@@ -125,3 +127,23 @@ setTimeout(function() {
   console.log('sending keepalive');
   client.send(' ');
 }, config.keepalive_interval);
+
+
+var herokuUrl = process.env.HEROKU_URL;
+if(herokuUrl) {
+  if(!/\/$/.test(herokuUrl)) { herokuUrl += '/'; }
+
+  setInterval(function() {
+    HttpClient.create(herokuUrl+"ping").post()(function(err, res, body) {
+      console.log('heroku keepalive ping');
+    });
+  }, 1200000);
+
+  http.createServer(function(req, res) {
+    res.writeHead(200, ['Content-Type', 'text/plain']);
+    res.write('PONG');
+    res.end();
+  }).listen(process.env.PORT || 8080);
+
+  console.log('Initialized ping server');
+}
