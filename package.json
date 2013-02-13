@@ -12,6 +12,10 @@
   },
   "author": "Lou Kosak <lkosak@gmail.com>",
   "license": "BSD",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
   "dependencies": {
     "node-xmpp": "~0.3.2",
     "scoped-http-client": "~0.9.7"
