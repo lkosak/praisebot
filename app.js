@@ -1,8 +1,8 @@
 var xmpp = require('node-xmpp');
-var config = require('config');
 var http = require('http');
 var HttpClient = require('scoped-http-client');
-var User = require('user');
+var config = require('./config');
+var User = require('./user');
 
 var client = new xmpp.Client({ jid: config.jid, password: config.password });
 
