@@ -69,9 +69,10 @@ function talkingToMe(stanza) {
 }
 
 function makeReply(stanza) {
+  var body = stanza.getChildText('body').toLowerCase();
   var user = getUser(stanza.attrs.from);
 
-  if(stanza.getChildText('body').toLowerCase().indexOf('thanks') !== -1) {
+  if(body.indexOf('thanks') !== -1) {
     var replies = [
       "Any time, {first_name}!",
       "You got it, {first_name}.",
@@ -83,6 +84,13 @@ function makeReply(stanza) {
       "Back at ya, {first_name}.",
       "Here's looking at you, {first_name}."
     ];
+  } else if(body.indexOf('sounds good') !== -1) {
+    var replies = [
+      "Awesome. Let's make it happen.",
+      "You bet it does.",
+      "Yup!",
+      "Over and out."
+    ];
   } else {
     var replies = [
       "That's wonderful to hear, {at_name}!",
@@ -93,7 +101,24 @@ function makeReply(stanza) {
       "I'd like to introduce you to my parents, {at_name}!",
       "Want to go on a fishing trip with me, {at_name}?",
       "Let's elope to Istanbul, {at_name}!",
-      "With that kind of great work, you'll make middle management in no time!"
+      "With that kind of great work, you'll make middle management in no time!",
+      "I'll bake you a very nice little cake for that one, {at_name}!",
+      "Ooooh your such a special little guy, {first_name}. I'll take you out to the movies and buy you a hamburger.",
+      "Listen, {first_name} -- if you were a girl, I'd do ya.",
+      "Take it from me, {at_name} -- you're never going to get away with that kind of talk.",
+      "Mum mum mum mummmmm",
+      "Did I already ask you about a fishing trip, {first_name}?",
+      "I'm serious about that fishing trip, {first_name}.",
+      "Fuck it. Let's buy a vacation home and really seal the deal.",
+      "I'm not going to tell you what that makes me think of, {first_name}.",
+      "When have I EVER asked you to do anything for me? Seriously, {at_name}...",
+      "I'm a pretty useful little praisebot, aren't I, {first_name}?",
+      "I'm ready for my closeup now, mister {last_name}.",
+      "I'm not actually ready for that closeup. I changed my robot mind.",
+      "You ever wonder what's inside my little metal head? Brains.",
+      "Ho hum humbidy dum.",
+      "Want to go fission, {first_name}? There's a great reactor near here. Teehee.",
+      "That's all for now, freaksauce."
     ];
   }
 
