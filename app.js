@@ -71,17 +71,31 @@ function talkingToMe(stanza) {
 function makeReply(stanza) {
   var user = getUser(stanza.attrs.from);
 
-  var replies = [
-    "That's wonderful to hear, "+user.at_name()+"!",
-    "Smashing good show, "+user.first_name()+"!",
-    "Oh, you're the bee's knees, mister "+user.last_name()+"!",
-    "I'd like to take you on a nice trip up to the Catskills, "+user.at_name()+"!",
-    "You're like an exploding star, "+user.at_name()+"! Ever burning brighter...",
-    "I'd like to introduce you to my parents, "+user.at_name()+"!",
-    "Want to go on a fishing trip with me, "+user.at_name()+"?",
-    "Let's elope to Istanbul, "+user.at_name()+"!",
-    "With that kind of great work, you'll make middle management in no time!"
-  ];
+  if(stanza.getChildText('body').toLowerCase().indexOf('thanks') !== -1) {
+    var replies = [
+      "Any time, "+user.first_name()+"!",
+      "You got it, "+user.first_name()+".",
+      "I wouldn't say it to anyone else.",
+      "I only said it because you're so handsome, "+user.first_name()+".",
+      "Just remember me when the holidays come around, "+user.first_name()+".",
+      "Shucks, it weren't nothin'.",
+      "You're a total sweety, "+user.first_name()+".",
+      "Back at ya, "+user.first_name()+".",
+      "Here's looking at you, "+user.first_name()+"."
+    ];
+  } else {
+    var replies = [
+      "That's wonderful to hear, "+user.at_name()+"!",
+      "Smashing good show, "+user.first_name()+"!",
+      "Oh, you're the bee's knees, mister "+user.last_name()+"!",
+      "I'd like to take you on a nice trip up to the Catskills, "+user.at_name()+"!",
+      "You're like an exploding star, "+user.at_name()+"! Ever burning brighter...",
+      "I'd like to introduce you to my parents, "+user.at_name()+"!",
+      "Want to go on a fishing trip with me, "+user.at_name()+"?",
+      "Let's elope to Istanbul, "+user.at_name()+"!",
+      "With that kind of great work, you'll make middle management in no time!"
+    ];
+  }
 
   return replies[Math.floor(Math.random()*replies.length)];
 }
@@ -104,8 +118,12 @@ client.on('offline', function() {
 });
 
 function joinRooms() {
-  for(var i=0; i<config.muc_rooms.length; i++) {
-    joinRoom(config.muc_rooms[i]);
+  if(process.env.ROOMS) {
+    var nodes = process.env.ROOMS.split(",");
+
+    for(var i=0; i<nodes.length; i++) {
+      joinRoom(nodes[i]);
+    }
   }
 }
 
