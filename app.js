@@ -73,31 +73,41 @@ function makeReply(stanza) {
 
   if(stanza.getChildText('body').toLowerCase().indexOf('thanks') !== -1) {
     var replies = [
-      "Any time, "+user.first_name()+"!",
-      "You got it, "+user.first_name()+".",
+      "Any time, {first_name}!",
+      "You got it, {first_name}.",
       "I wouldn't say it to anyone else.",
-      "I only said it because you're so handsome, "+user.first_name()+".",
-      "Just remember me when the holidays come around, "+user.first_name()+".",
+      "I only said it because you're so handsome, {first_name}.",
+      "Just remember me when the holidays come around, {first_name}.",
       "Shucks, it weren't nothin'.",
-      "You're a total sweety, "+user.first_name()+".",
-      "Back at ya, "+user.first_name()+".",
-      "Here's looking at you, "+user.first_name()+"."
+      "You're a total sweety, {first_name}.",
+      "Back at ya, {first_name}.",
+      "Here's looking at you, {first_name}."
     ];
   } else {
     var replies = [
-      "That's wonderful to hear, "+user.at_name()+"!",
-      "Smashing good show, "+user.first_name()+"!",
-      "Oh, you're the bee's knees, mister "+user.last_name()+"!",
-      "I'd like to take you on a nice trip up to the Catskills, "+user.at_name()+"!",
-      "You're like an exploding star, "+user.at_name()+"! Ever burning brighter...",
-      "I'd like to introduce you to my parents, "+user.at_name()+"!",
-      "Want to go on a fishing trip with me, "+user.at_name()+"?",
-      "Let's elope to Istanbul, "+user.at_name()+"!",
+      "That's wonderful to hear, {at_name}!",
+      "Smashing good show, {first_name}!",
+      "Oh, you're the bee's knees, mister {last_name}!",
+      "I'd like to take you on a nice trip up to the Catskills, {at_name}!",
+      "You're like an exploding star, {at_name}! Ever burning brighter...",
+      "I'd like to introduce you to my parents, {at_name}!",
+      "Want to go on a fishing trip with me, {at_name}?",
+      "Let's elope to Istanbul, {at_name}!",
       "With that kind of great work, you'll make middle management in no time!"
     ];
   }
 
-  return replies[Math.floor(Math.random()*replies.length)];
+  var reply = replies[Math.floor(Math.random()*replies.length)];
+
+  reply = reply.replace(/{(.*?)}/, function(match, text, attr) {
+    if(typeof user[text] === "function") {
+      return user[text]();
+    } else {
+      return text;
+    }
+  });
+
+  return reply;
 }
 
 function getUser(jid) {
